@@ -1,8 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, XIcon, ShoppingBagIcon } from '@heroicons/react/outline'
 import {Link, NavLink} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const user = {
 	name: 'Tom Cook',
@@ -23,6 +24,9 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+
+	const count = useSelector((state) => state.counter.value)
+
 	return (
 		<>
 			<div className="min-h-full">
@@ -63,11 +67,19 @@ export default function Navbar() {
 									<div className="hidden md:block">
 										<div className="ml-4 flex items-center md:ml-6">
 											<button
+												style={{
+													position:"relative"
+												}}
 												type="button"
 												className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 											>
 												<span className="sr-only">View notifications</span>
-												<BellIcon className="h-6 w-6" aria-hidden="true" />
+												<ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+												<span style={{
+													position:"absolute",
+													top:"-4px",
+													right:"0"
+												}}>{count}</span>
 											</button>
 
 											{/* Profile dropdown */}
@@ -153,7 +165,7 @@ export default function Navbar() {
 											className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 										>
 											<span className="sr-only">View notifications</span>
-											<BellIcon className="h-6 w-6" aria-hidden="true" />
+											<ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
 										</button>
 									</div>
 									<div className="mt-3 px-2 space-y-1">
