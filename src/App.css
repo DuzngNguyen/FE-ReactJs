@@ -1,3 +1,5 @@
+@import '~react-notifications/lib/notifications.css';
+
 .App {
   text-align: center;
 }
@@ -41,3 +43,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+

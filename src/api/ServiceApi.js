@@ -7,7 +7,7 @@ const ServiceApi = axios.create({
 	responseType: 'json',
 })
 console.log('---------- process.env.URL: ', process.env.URL);
-console.log('---------- ServiceApi: ', ServiceApi);
+// console.log('---------- ServiceApi: ', ServiceApi);
 
 let user = getSession('userInfo')
 

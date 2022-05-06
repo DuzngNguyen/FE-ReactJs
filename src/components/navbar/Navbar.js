@@ -14,6 +14,7 @@ const user = {
 const navigation = [
 	{ name: 'Trang chủ', href: '/', current: true, path: '/'},
 	{ name: 'Sản phẩm', href: '/san-pham', current: false, path: '/san-pham'},
+	{ name: 'Liên hệ', href: '/lien-he', current: false, path: '/lien-he'},
 ]
 const userNavigation = [
 	{ name: 'Cấu hình', href: '#' }
@@ -37,11 +38,13 @@ export default function Navbar() {
 								<div className="flex items-center justify-between h-16">
 									<div className="flex items-center">
 										<div className="flex-shrink-0">
-											<img
-												className="h-8 w-8"
-												src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-												alt="Workflow"
-											/>
+											<Link to="/">
+												<img
+													className="h-8 w-8"
+													src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+													alt="Workflow"
+												/>
+											</Link>
 										</div>
 										{/*item.current*/}
 										{/*? 'bg-gray-900 text-white'*/}
