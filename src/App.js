@@ -7,6 +7,8 @@ import ProductPage from './screens/product/ProductPage';
 import ProductDetailPage from './screens/product_detail/ProductDetailPage';
 import ContactPage from './screens/contact/contactPage';
 import CategoryPage from './screens/category/CategoryPage';
+import LoginPage from './screens/login/LoginPage';
+import RegisterPage from './screens/register/RegisterPage';
 export default function App() {
     return (
         <div>
@@ -14,6 +16,8 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/lien-he" element={<ContactPage />} />
+                <Route path="/dang-nhap" element={<LoginPage />} />
+                <Route path="/dang-ky" element={<RegisterPage />} />
                 <Route path="/san-pham" element={<ProductPage />} />
                 <Route path="/danh-muc/:slug-:id" element={<CategoryPage />} />
                 <Route path="/san-pham/:slug-:id" element={<ProductDetailPage />} />

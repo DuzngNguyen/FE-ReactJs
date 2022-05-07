@@ -15,6 +15,8 @@ const navigation = [
 	{ name: 'Trang chủ', href: '/', current: true, path: '/'},
 	{ name: 'Sản phẩm', href: '/san-pham', current: false, path: '/san-pham'},
 	{ name: 'Liên hệ', href: '/lien-he', current: false, path: '/lien-he'},
+	{ name: 'Đăng nhập', href: '/dang-nhap', current: false, path: '/dang-nhap'},
+	{ name: 'Đăng ký', href: '/dang-ky', current: false, path: '/dang-ky'},
 ]
 const userNavigation = [
 	{ name: 'Cấu hình', href: '#' }
