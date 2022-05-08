@@ -18,8 +18,6 @@ function ProductPage()
 			console.log('====================: ', results.data.products);
 			setListProduct(results.data);
 		}
-
-		console.log('=========== data:fetchListsProducts ', results.status);
 	}
 	return (
 		<>

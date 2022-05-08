@@ -1,7 +1,6 @@
 import ProductNew from '../../containers/home/ProductNew';
 import {useEffect, useState} from 'react';
 import {fetchListsProducts} from '../../api/product/ProductServiceApi';
-import {Link} from 'react-router-dom';
 import CategoryHot from '../../containers/home/CategoryHot';
 import {fetchListsCategoryHot} from '../../api/category/CategoryServiceApi';
 
@@ -11,8 +10,8 @@ function HomePage() {
 	const [listCategories, setListCategories] = useState(null)
 
 	useEffect(() => {
-		getListsProducts();
-		getListsCategoriesHot();
+		getListsProducts().then(r => {});
+		getListsCategoriesHot().then(r => {});
 	}, []);
 
 	const getListsProducts = async (filter) => {
@@ -20,11 +19,8 @@ function HomePage() {
 		const results = await fetchListsProducts(filter)
 		if (results && results.status === 'success')
 		{
-			console.log('====================: ', results.data.products);
 			setListProduct(results.data);
 		}
-
-		console.log('=========== data:fetchListsProducts ', results.status);
 	}
 
 	const getListsCategoriesHot = async () => {
@@ -33,8 +29,6 @@ function HomePage() {
 		{
 			setListCategories(results.data);
 		}
-
-		console.log('====================data:getListsCategoriesHot ', results.data);
 	}
 
 	return (

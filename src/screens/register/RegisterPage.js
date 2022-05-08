@@ -2,9 +2,12 @@ import {useEffect, useState} from 'react';
 import "tailwindcss/base.css";
 import "tailwindcss/components.css";
 import "tailwindcss/utilities.css";
-import {createContact} from '../../api/contact/ContactServiceApi';
-// import { useHistory } from "react-router-dom";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {Link} from 'react-router-dom';
+import {setUserSession} from '../../functions/common-func';
+import {setToken, setUser} from '../../app/user/userSlice';
+import {useDispatch} from 'react-redux';
+import {register} from '../../api/auth/RegisterServiceApi';
 
 export default function RegisterPage() {
 
@@ -14,18 +17,22 @@ export default function RegisterPage() {
 		name: "",
 		phone: "",
 	});
+	const dispatch = useDispatch();
 
 	const [formData, updateFormData] = useState(initialFormData);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		console.log('------------------- initialFormData; ', formData);
+		const results = await register(formData)
 
-		const results = await createContact(formData)
-		console.log('=================== results: ', results);
 		if (results && results.status === 'success')
 		{
-			NotificationManager.success('Dữ liệu đã được xử lý, Admin sẽ liên hệ với bạn', 'Thông báo');
+			NotificationManager.success('Đăng ký thành công', 'Thông báo');
+			setUserSession(results.data.accessToken, results.data.user);
+			dispatch(setToken(results.data.accessToken))
+			dispatch(setUser(results.data.user))
+			window.location.href = `/`
+
 			console.log('====================: ', results.data);
 		}
 
@@ -67,7 +74,7 @@ export default function RegisterPage() {
 								<div className="mb-6">
 									<label htmlFor="email"
 										   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-									<input type="email" id="email" name="email"
+									<input type="email" id="email" name="email" onChange={handleChange}
 										   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										   placeholder="name@flowbite.com"
 										   required />
@@ -75,7 +82,7 @@ export default function RegisterPage() {
 								<div className="mb-6">
 									<label htmlFor="email"
 										   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone</label>
-									<input type="number" id="phone" name="phone"
+									<input type="number" id="phone" name="phone" onChange={handleChange}
 										   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										   placeholder="0986420994"
 										   required />
@@ -83,10 +90,13 @@ export default function RegisterPage() {
 								<div className="mb-6">
 									<label htmlFor="password"
 										   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-									<input type="password" id="password" name="password"
+									<input type="password" id="password" name="password" onChange={handleChange}
 										   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										   placeholder="******"
 										   required />
+								</div>
+								<div className="mb-6">
+									<Link to="/dang-nhap"><a>Đăng nhập tại đây</a></Link>
 								</div>
 								<button type="submit" onClick={handleSubmit}
 										className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

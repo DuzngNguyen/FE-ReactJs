@@ -22,7 +22,6 @@ export default function ProductNew({listProduct}) {
 
 	},[listProduct])
 
-	console.log('------------- listProduct: ', listProduct);
 	return (
 		<div className="bg-white">
 			<div className="max-w-2xl mx-auto px-4 sm:py-6 sm:px-6 lg:max-w-7xl lg:px-8">

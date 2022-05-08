@@ -5,8 +5,15 @@ import "tailwindcss/utilities.css";
 import {login} from '../../api/auth/LoginServiceApi';
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {setUserSession} from '../../functions/common-func';
+import {useDispatch, useSelector} from 'react-redux';
+import {setToken, setUser} from '../../app/user/userSlice';
+import {Link} from 'react-router-dom';
 
 export default function LoginPage() {
+
+	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
 
 	const initialFormData = Object.freeze({
 		email: "",
@@ -23,7 +30,11 @@ export default function LoginPage() {
 		console.log('=================== results: ', results);
 		if (results && results.status === 'success')
 		{
-			NotificationManager.success('Dữ liệu đã được xử lý, Admin sẽ liên hệ với bạn', 'Thông báo');
+			NotificationManager.success('Đăng nhập thành công', 'Thông báo');
+			setUserSession(results.data.accessToken, results.data.user);
+			dispatch(setToken(results.data.accessToken))
+			dispatch(setUser(results.data.user))
+			window.location.href = `/`
 			console.log('====================: ', results.data);
 		}
 
@@ -56,7 +67,7 @@ export default function LoginPage() {
 								<div className="mb-6">
 									<label htmlFor="email"
 										   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-									<input type="email" id="email" name="email"
+									<input type="email" id="email" name="email" onChange={handleChange}
 										   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										   placeholder="name@flowbite.com"
 										   required />
@@ -64,10 +75,13 @@ export default function LoginPage() {
 								<div className="mb-6">
 									<label htmlFor="password"
 										   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mật khẩu</label>
-									<input type="password" id="password" name="password"
+									<input type="password" id="password" name="password" onChange={handleChange}
 										   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										   placeholder="*********"
 										   required />
+								</div>
+								<div className="mb-6">
+									<Link to="/dang-ky"><a>Bạn chưa có tài khoản? Đăng ký tại đây</a></Link>
 								</div>
 								<button type="submit" onClick={handleSubmit}
 										className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

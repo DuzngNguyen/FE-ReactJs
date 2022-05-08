@@ -42,7 +42,7 @@ export default function CategoryHot({listCategories}) {
 								<div className="box">
 									{/*<Link to="/" className="avatar">*/}
 									<Link to={'/danh-muc/' + item.slug + '-' + item.id} className="avatar">
-										<img src="https://salt.tikicdn.com/ts/category/47/0d/1a/09e7eca04da86b1ece2461fdcac3d847.jpg" alt="" />
+										<img src={item.avatar} alt="" />
 									</Link>
 									<h3 className="item-title">
 										<a href="">{item.name}</a>

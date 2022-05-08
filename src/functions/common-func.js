@@ -1,18 +1,4 @@
-// import moment from 'moment'
-import React from 'react'
 export const EXPRESSTIME = 300;
-export const getSession = function (sessionName) {
-    let Value = JSON.parse(window.localStorage.getItem(sessionName))
-    if (Value) {
-        let expirationDate = new Date(Value.expirationDate)
-        if (expirationDate > new Date()) {
-            return Value
-        } else {
-            window.localStorage.removeItem(sessionName)
-        }
-    }
-    return false
-}
 
 export const displayPrice = (price, currency) => {
     if (price) {
@@ -33,6 +19,10 @@ export const displayPrice = (price, currency) => {
         }
         const formatPrice = () => {
             let rate = 1
+            if (currency === 'USD') {
+                let exChangeRate = getExChangeRateSession()
+                rate = exChangeRate['transfer']
+            }
             return formatCurr(price / rate, currency)
         }
         return formatPrice()
@@ -40,20 +30,34 @@ export const displayPrice = (price, currency) => {
     return 0
 }
 
-export const setSession = function (sessionName, sessionValue, expirationInMin) {
-    let expirationDate = new Date(new Date().getTime() + EXPRESSTIME * expirationInMin)
-    sessionValue.expirationDate = expirationDate.toISOString()
-    localStorage.setItem(sessionName, JSON.stringify(sessionValue))
+export const getExChangeRateSession = () => {
+    const changerate = window.localStorage.getItem('exchange_rate')
+    return changerate ? JSON.parse(changerate) : null
 }
 
-export const addSession = (sessionName, sessionValue) => {
-    localStorage.setItem(sessionName, JSON.stringify(sessionValue))
+export const getUser = () => {
+    const userStr = sessionStorage.getItem('user');
+    console.log('=============== userStr: ', userStr);
+    if (userStr && userStr !== 'undefined') {
+        console.log('----------- OK');
+        return JSON.parse(userStr);
+    }
+    return null;
 }
 
-export const removeSession = (sessionName) => {
-    localStorage.removeItem(sessionName)
+// return the token from the session storage
+export const getToken = () => {
+    return sessionStorage.getItem('token') || null;
 }
 
+// remove the token and user from the session storage
 export const removeUserSession = () => {
-    localStorage.clear()
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+}
+
+// set the token and user from the session storage
+export const setUserSession = (token, user) => {
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('user', JSON.stringify(user));
 }

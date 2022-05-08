@@ -5,7 +5,7 @@ import {
 } from '../../api/product/ProductServiceApi';
 import {displayPrice} from '../../functions/common-func';
 import {useDispatch, useSelector} from 'react-redux';
-import { decrement, increment } from './../../app/counter/counterSlice'
+import { decrement, increment } from './../../app/counter/counterSlice';
 const breadcrumbs = [
 	{
 		id : 1,
