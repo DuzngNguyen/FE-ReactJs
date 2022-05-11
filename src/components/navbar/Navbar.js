@@ -35,8 +35,6 @@ export default function Navbar() {
 
 	const count = useSelector((state) => state.counter.value)
 	const userLogin = getUser();
-	console.log('================ userLogin: ', userLogin);
-
 	const logout = () => {
 		removeUserSession();
 		window.location.href = `/`;
@@ -119,6 +117,11 @@ export default function Navbar() {
 													>
 														<Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
 															<Menu.Item>
+																<Link to="/don-hang" className="block px-4 py-2 text-sm text-gray-700">
+																	Đơn hàng
+																</Link>
+															</Menu.Item>
+															<Menu.Item>
 																<a onClick={logout} className="block px-4 py-2 text-sm text-gray-700">Đăng xuất</a>
 															</Menu.Item>
 														</Menu.Items>
@@ -182,16 +185,22 @@ export default function Navbar() {
 										</button>
 									</div>
 									<div className="mt-3 px-2 space-y-1">
-										{userNavigation.map((item) => (
-											<Disclosure.Button
-												key={item.name}
-												as="a"
-												href={item.href}
-												className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-											>
-												{item.name}
-											</Disclosure.Button>
-										))}
+										<Disclosure.Button
+											key="1"
+											as="dang-xuat"
+											href="/"
+											className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+										>
+											Đơn hàng
+										</Disclosure.Button>
+										<Disclosure.Button
+											key="1"
+											as="dang-xuat"
+											href="/"
+											className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+										>
+											Đăng xuất
+										</Disclosure.Button>
 									</div>
 								</div>
 							</Disclosure.Panel>
