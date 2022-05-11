@@ -9,6 +9,7 @@ import ContactPage from './screens/contact/contactPage';
 import CategoryPage from './screens/category/CategoryPage';
 import LoginPage from './screens/login/LoginPage';
 import RegisterPage from './screens/register/RegisterPage';
+import CartPage from './screens/cart/CartPage';
 export default function App() {
     return (
         <div>
@@ -21,6 +22,7 @@ export default function App() {
                 <Route path="/san-pham" element={<ProductPage />} />
                 <Route path="/danh-muc/:slug-:id" element={<CategoryPage />} />
                 <Route path="/san-pham/:slug-:id" element={<ProductDetailPage />} />
+                {/*<Route path="/gio-hang/:id" element={<CartPage />} />*/}
             </Routes>
             <Footer />
         </div>
