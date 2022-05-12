@@ -84,7 +84,6 @@ function TransactionPage()
 									{item.t_phone}
 								</td>
 								<td className="px-6 py-4">
-									$2999
 									{displayPrice(item?.t_total_money)}
 								</td>
 							</tr>
